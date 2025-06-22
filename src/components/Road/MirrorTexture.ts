@@ -8,7 +8,6 @@ export class MirrorTexture extends THREE.WebGLRenderTarget {
     super(size.width, size.height, {
       depthBuffer: true,
       depthTexture: new THREE.DepthTexture(size.width, size.height),
-      encoding: THREE.sRGBEncoding,
     });
     this.camera = camera.clone();
   }
