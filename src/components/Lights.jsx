@@ -1,6 +1,6 @@
 import { Environment, Lightformer } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useLayoutEffect, useMemo, useRef } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 
 import { createNoise2D } from "simplex-noise";
 import { MathUtils } from "three";
@@ -27,6 +27,13 @@ export default function Lights() {
       }),
     [sprites]
   );
+
+  useEffect(() => {
+    return () => {
+      thunderSounds.stop();
+      thunderSounds.unload();
+    };
+  }, [thunderSounds]);
 
   const lightningEnabled = useRef(false);
 

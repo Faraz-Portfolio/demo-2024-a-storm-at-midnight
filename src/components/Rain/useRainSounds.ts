@@ -27,6 +27,18 @@ export function useRainSounds() {
   );
 
   useEffect(() => {
+    return () => {
+      rainSound.stop();
+      nightSound.stop();
+      beatSound.stop();
+
+      rainSound.unload();
+      nightSound.unload();
+      beatSound.unload();
+    };
+  }, [rainSound, nightSound, beatSound]);
+
+  useEffect(() => {
     if (started) {
       rainSound.fade(0, 0.5, 2000).play();
       nightSound.fade(0, 0.5, 2000).play();
