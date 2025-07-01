@@ -1,3 +1,11 @@
+# Hexagon Terrain
+
+View Live: https://farazzshaikh.com/demos/demo-2024-a-storm-at-midnight
+
+https://github.com/user-attachments/assets/6a74f8d9-4a5d-4831-95ef-b0a5c9d52bb8
+
+An experiemnt in realism in ThreeJS
+
 ## Credits
 
 Design + Dev by Faraz Shaikh ([@CantBeFaraz](https://x.com/CantBeFaraz))
