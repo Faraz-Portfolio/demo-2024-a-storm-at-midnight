@@ -9,7 +9,7 @@ export function Floor() {
     (t) => {
       t.wrapS = t.wrapT = RepeatWrapping;
       t.repeat.set(textureRepeat, textureRepeat);
-    }
+    },
   );
 
   return (

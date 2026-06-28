@@ -1,4 +1,5 @@
 import * as React from "react";
+import type * as THREE from "three";
 import { Drops } from "./Drops";
 import { Splashes } from "./Splashes";
 import { useRainSounds } from "./useRainSounds";

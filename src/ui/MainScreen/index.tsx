@@ -48,7 +48,7 @@ export const BestOn = styled.p`
 
 export function MainScreen() {
   const started = useApp((s) => s.started);
-  const [credit, setCredit] = useState<string[]>([]);
+  const [, setCredit] = useState<string[]>([]);
 
   const credits = [
     ["Bike by @zachiar on Skechfab", "https://sketchfab.com/zachiar"],

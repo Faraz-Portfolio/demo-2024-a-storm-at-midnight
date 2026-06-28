@@ -6,7 +6,7 @@ import {
 
 export function Post() {
   return (
-    <EffectComposer disableNormalPass>
+    <EffectComposer enableNormalPass={false}>
       <BrightnessContrast brightness={0.05} contrast={0.2} />
       <Bloom luminanceThreshold={2} mipmapBlur intensity={1} />
     </EffectComposer>

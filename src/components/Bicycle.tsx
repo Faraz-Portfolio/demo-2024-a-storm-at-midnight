@@ -6,10 +6,10 @@ import { Sparkles, useGLTF } from "@react-three/drei";
 import type { ElementProps } from "@react-three/fiber";
 import { Color, Group } from "three";
 
+const baseUrl = import.meta.env.BASE_URL;
+
 export function Bicycle(props: ElementProps<typeof Group>) {
-  const { nodes, materials } = useGLTF(
-    "/demo-2024-a-storm-at-midnight/bicycle.glb"
-  ) as any;
+  const { nodes, materials } = useGLTF(baseUrl + "bicycle.glb") as any;
 
   return (
     <group {...props} dispose={null}>

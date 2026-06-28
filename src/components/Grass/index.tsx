@@ -10,12 +10,12 @@ import * as THREE from "three";
 import { isDesktop } from "react-device-detect";
 import { GrassMaterial } from "./GrassMaterial";
 
+const baseUrl = import.meta.env.BASE_URL;
+
 export function Grass(props: any) {
-  const { nodes, materials } = useGLTF(
-    "/demo-2024-a-storm-at-midnight/bicycle.glb"
-  ) as any;
+  const { nodes, materials } = useGLTF(baseUrl + "bicycle.glb") as any;
   const { nodes: foliageNodes, materials: foliageMaterials } = useGLTF(
-    "/demo-2024-a-storm-at-midnight/foliage.glb"
+    baseUrl + "foliage.glb",
   ) as any;
 
   const meshRef = useRef<THREE.Mesh>(null!);
@@ -38,12 +38,12 @@ export function Grass(props: any) {
           {/* Grass */}
           <Sampler
             count={count}
-            transform={({ position, normal, dummy: object }) => {
+            transform={({ position, dummy: object }) => {
               const p = position.clone().multiplyScalar(2);
               let n = noise(...p.toArray());
               n = THREE.MathUtils.smootherstep(n, 0.0, 0.7);
               object.scale.setScalar(
-                THREE.MathUtils.mapLinear(n, -1, 1, 0.5, 1.5)
+                THREE.MathUtils.mapLinear(n, -1, 1, 0.5, 1.5),
               );
               object.position.copy(position);
               object.rotation.y = THREE.MathUtils.randFloatSpread(Math.PI * 2);
@@ -62,12 +62,12 @@ export function Grass(props: any) {
           {/* Dandelions */}
           <Sampler
             count={count / 10}
-            transform={({ position, normal, dummy: object }) => {
+            transform={({ position, dummy: object }) => {
               const p = position.clone().multiplyScalar(1);
               let n = noise(...p.toArray());
               n = THREE.MathUtils.smootherstep(n, 0.0, 0.7);
               object.scale.setScalar(
-                THREE.MathUtils.mapLinear(n, -1, 1, 0.2, 2)
+                THREE.MathUtils.mapLinear(n, -1, 1, 0.2, 2),
               );
               object.position.copy(position);
               object.rotation.y = THREE.MathUtils.randFloatSpread(Math.PI * 2);
@@ -86,12 +86,12 @@ export function Grass(props: any) {
           {/* Weeds */}
           <Sampler
             count={count / 10}
-            transform={({ position, normal, dummy: object }) => {
+            transform={({ position, dummy: object }) => {
               const p = position.clone().multiplyScalar(1);
               let n = noise(...p.toArray());
               n = THREE.MathUtils.smootherstep(n, 0.0, 0.7);
               object.scale.setScalar(
-                THREE.MathUtils.mapLinear(n, -1, 1, 0.7, 1.5)
+                THREE.MathUtils.mapLinear(n, -1, 1, 0.7, 1.5),
               );
               object.position.copy(position);
               object.rotation.y = THREE.MathUtils.randFloatSpread(Math.PI * 2);

@@ -28,7 +28,7 @@ export function MirrorMaterial({
           vCameraPosition = cameraPosition;
         }
     `,
-    []
+    [],
   );
 
   const fragmentShader = useMemo(
@@ -232,7 +232,7 @@ export function MirrorMaterial({
           // csm_FragColor.rgb = vec3(worldSpaceHeight);
         }
     `),
-    []
+    [],
   );
 
   const patchMap = useMemo(
@@ -244,7 +244,7 @@ export function MirrorMaterial({
 			`,
       },
     }),
-    []
+    [],
   );
 
   const uniforms = useMemo(
@@ -255,7 +255,7 @@ export function MirrorMaterial({
       uCameraNearFar: { value: new THREE.Vector2() },
       uTime: { value: 0 },
     }),
-    []
+    [],
   );
 
   const viewport = useThree((s) => s.viewport);
@@ -264,10 +264,10 @@ export function MirrorMaterial({
   useLayoutEffect(() => {
     uniforms.uResolution.value.set(
       size.width * viewport.dpr,
-      size.height * viewport.dpr
+      size.height * viewport.dpr,
     );
     uniforms.uRenderTexture.value = renderTexture.texture;
-    uniforms.uDepthTexture.value = renderTexture.depthTexture;
+    uniforms.uDepthTexture.value = renderTexture.depthTexture!;
     uniforms.uCameraNearFar.value.set(camera.near, camera.far);
   }, [renderTexture, size, viewport, camera]);
 

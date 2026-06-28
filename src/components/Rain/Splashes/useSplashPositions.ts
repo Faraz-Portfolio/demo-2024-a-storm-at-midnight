@@ -9,7 +9,7 @@ const isMesh = (obj: THREE.Object3D): obj is THREE.Mesh =>
 
 export function useSplashPositions(
   groupRef: React.MutableRefObject<THREE.Group>,
-  instancedMeshRef: React.MutableRefObject<THREE.InstancedMesh>
+  instancedMeshRef: React.MutableRefObject<THREE.InstancedMesh>,
 ) {
   const worldSkyDirection = React.useMemo(() => new THREE.Vector3(0, 1, 0), []);
 
@@ -26,10 +26,10 @@ export function useSplashPositions(
       if (isMesh(obj)) {
         const mesh = obj;
         const positionAttr = mesh.geometry.getAttribute(
-          "position"
+          "position",
         ) as THREE.InstancedBufferAttribute;
         const normalAttr = mesh.geometry.getAttribute(
-          "normal"
+          "normal",
         ) as THREE.InstancedBufferAttribute;
         const count = positionAttr.count;
 
@@ -48,7 +48,7 @@ export function useSplashPositions(
 
         const skyWeightAttr = new THREE.InstancedBufferAttribute(
           skyWeightAttrArray,
-          1
+          1,
         );
         mesh.geometry.setAttribute("skyWeight", skyWeightAttr);
 
@@ -64,8 +64,8 @@ export function useSplashPositions(
   }, []);
 
   const _dummy = React.useMemo(() => new THREE.Object3D(), []);
-  const _dummyY = React.useMemo(() => [], []);
-  const _InitialY = React.useMemo(() => [], []);
+  const _dummyY = React.useMemo<number[]>(() => [], []);
+  const _InitialY = React.useMemo<number[]>(() => [], []);
   useFrame(({ camera }, dt) => {
     if (samplersRef.current.length === 0) return;
 
@@ -76,7 +76,7 @@ export function useSplashPositions(
     const countPerMesh = Math.ceil(count / samplers.length);
 
     const progressAttr = instancedMesh.geometry.getAttribute(
-      "aSplashProgress"
+      "aSplashProgress",
     ) as THREE.InstancedBufferAttribute;
 
     let j = 0;
@@ -87,7 +87,7 @@ export function useSplashPositions(
         _dummy.matrix.decompose(
           _dummy.position,
           _dummy.quaternion,
-          _dummy.scale
+          _dummy.scale,
         );
 
         if (_dummyY[j] === undefined) {
@@ -111,14 +111,14 @@ export function useSplashPositions(
           _InitialY[j],
           -0.2,
           1,
-          0
+          0,
         );
 
         progressAttr.setX(j, progress);
 
         _dummy.rotation.y = Math.atan2(
           camera.position.x - _dummy.position.x,
-          camera.position.z - _dummy.position.z
+          camera.position.z - _dummy.position.z,
         );
 
         _dummy.updateMatrix();

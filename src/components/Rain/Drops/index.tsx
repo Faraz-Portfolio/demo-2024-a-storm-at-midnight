@@ -20,7 +20,7 @@ export const Drops = React.forwardRef<THREE.Group, DropsProps>(
         _dummy.position.set(
           THREE.MathUtils.randFloatSpread(5),
           THREE.MathUtils.randFloat(-0.1, 5),
-          THREE.MathUtils.randFloatSpread(5)
+          THREE.MathUtils.randFloatSpread(5),
         );
 
         _dummy.updateMatrix();
@@ -29,7 +29,7 @@ export const Drops = React.forwardRef<THREE.Group, DropsProps>(
       dropsMesh.instanceMatrix.needsUpdate = true;
     }, []);
 
-    useFrame(({ camera, clock }, dt) => {
+    useFrame(({ camera }, dt) => {
       const dropsMesh = dropsRef.current;
 
       for (let i = 0; i < count; i++) {
@@ -37,12 +37,12 @@ export const Drops = React.forwardRef<THREE.Group, DropsProps>(
         _dummy.matrix.decompose(
           _dummy.position,
           _dummy.quaternion,
-          _dummy.scale
+          _dummy.scale,
         );
 
         _dummy.rotation.y = Math.atan2(
           camera.position.x - _dummy.position.x,
-          camera.position.z - _dummy.position.z
+          camera.position.z - _dummy.position.z,
         );
         _dummy.rotation.x = angles[i];
         _dummy.position.y -= dt * 5;
@@ -51,11 +51,11 @@ export const Drops = React.forwardRef<THREE.Group, DropsProps>(
           _dummy.position.set(
             THREE.MathUtils.randFloatSpread(5),
             THREE.MathUtils.randFloat(-0.1, 5),
-            THREE.MathUtils.randFloatSpread(5)
+            THREE.MathUtils.randFloatSpread(5),
           );
           initialY[i] = _dummy.position.y;
           angles[i] = THREE.MathUtils.randFloatSpread(
-            THREE.MathUtils.degToRad(20)
+            THREE.MathUtils.degToRad(20),
           );
           _dummy.scale.setScalar(THREE.MathUtils.randFloat(0.1, 0.5));
         }
@@ -78,7 +78,7 @@ export const Drops = React.forwardRef<THREE.Group, DropsProps>(
           vUv = uv;
         }
       `,
-      []
+      [],
     );
 
     const fragmentShader = React.useMemo(
@@ -126,21 +126,21 @@ export const Drops = React.forwardRef<THREE.Group, DropsProps>(
           
         }
       `,
-      []
+      [],
     );
 
     const uniforms = React.useMemo(
       () => ({
         uRainProgress: { value: 1 },
       }),
-      []
+      [],
     );
 
     return (
       <group ref={fref}>
         <instancedMesh
           ref={dropsRef}
-          args={[null, null, count]}
+          args={[undefined, undefined, count]}
           renderOrder={2}
         >
           <planeGeometry args={[0.5, 1]} />
@@ -155,5 +155,5 @@ export const Drops = React.forwardRef<THREE.Group, DropsProps>(
         </instancedMesh>
       </group>
     );
-  }
+  },
 );

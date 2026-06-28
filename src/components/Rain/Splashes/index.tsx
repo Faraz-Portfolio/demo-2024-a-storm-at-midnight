@@ -8,13 +8,13 @@ interface SplashesProps {
   count?: number;
 }
 
+const baseUrl = import.meta.env.BASE_URL;
+
 export const Splashes = React.forwardRef<
   THREE.Group,
   React.PropsWithChildren<SplashesProps>
 >(({ count = 1000, children }, fref) => {
-  const splashFlipBook = useTexture(
-    "/demo-2024-a-storm-at-midnight/Splash.png"
-  );
+  const splashFlipBook = useTexture(baseUrl + "Splash.png");
 
   const childrenGroupRef = React.useRef<THREE.Group>(null!);
   const splashRef = React.useRef<THREE.InstancedMesh>(null!);
@@ -37,7 +37,7 @@ export const Splashes = React.forwardRef<
 					csm_Position.y += 0.05;
         }
       `,
-    []
+    [],
   );
 
   const fragmentShader = React.useMemo(
@@ -90,7 +90,7 @@ export const Splashes = React.forwardRef<
           csm_DiffuseColor.a = texel.a * 0.2 * rainProgress;
         }
       `,
-    []
+    [],
   );
 
   const uniforms = React.useMemo(
@@ -98,7 +98,7 @@ export const Splashes = React.forwardRef<
       uFlipBook: { value: splashFlipBook },
       uRainProgress: { value: 1 },
     }),
-    []
+    [],
   );
 
   return (
